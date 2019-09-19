@@ -42,6 +42,26 @@ class User extends Authenticatable
         'verification_token'
     ];
 
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtolower($name);
+    }
+
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+    public function getEmailAttribute($email)
+    {
+        return ucwords($email);
+    }
+
     public function isVerified()
     {
         return $this->verified == self::VERIFIED_USER;
