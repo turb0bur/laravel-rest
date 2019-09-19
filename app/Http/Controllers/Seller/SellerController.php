@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Buyer;
+namespace App\Http\Controllers\Seller;
 
-use App\Buyer;
+use App\Seller;
 use App\Http\Controllers\Controller;
 
-class BuyerController extends Controller
+class SellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class BuyerController extends Controller
      */
     public function index()
     {
-        $buyers = Buyer::has('transactions')->get();
+        $sellers = Seller::has('products')->get();
 
-        return response()->json(['data' => $buyers], 200);
+        return response()->json(['data' => $sellers], 200);
     }
 
     /**
@@ -27,8 +27,8 @@ class BuyerController extends Controller
      */
     public function show($id)
     {
-        $buyer = Buyer::has('transactions')->findOrFail($id);
+        $seller = Seller::has('products')->findOrFail($id);
 
-        return response()->json(['data' => $buyer], 200);
+        return response()->json(['data' => $seller], 200);
     }
 }
