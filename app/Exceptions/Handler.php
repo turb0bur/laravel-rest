@@ -73,7 +73,7 @@ class Handler extends ExceptionHandler
             case($exception instanceof QueryException):
                 $error_code = $exception->errorInfo[1];
                 if($error_code == 1451) {
-                    return $this->errorResponse('Can not remove this resource permanently. It is related with any other resouve', 409);
+                    return $this->errorResponse('Can not remove this resource permanently. It is related with any other resources', 409);
                 }
             default:
                 return $this->errorResponse('Unexpected ecception. Try later.', 500);
