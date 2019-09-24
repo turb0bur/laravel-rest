@@ -76,7 +76,7 @@ class Handler extends ExceptionHandler
                     return $this->errorResponse('Can not remove this resource permanently. It is related with any other resources', 409);
                 }
             default:
-                return $this->errorResponse('Unexpected ecception. Try later.', 500);
+                return $this->errorResponse('Unexpected exception. Try later.', 500);
         endswitch;
     }
 
