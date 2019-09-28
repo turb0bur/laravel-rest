@@ -32,6 +32,6 @@ class UserCreated extends Mailable
      */
     public function build()
     {
-        return $this->text('mails.welcome');
+        return $this->markdown('mails.welcome')->subject('Please verify your account!');
     }
 }
