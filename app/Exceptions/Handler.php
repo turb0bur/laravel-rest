@@ -9,6 +9,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -72,9 +74,11 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
             case($exception instanceof QueryException):
                 $error_code = $exception->errorInfo[1];
-                if($error_code == 1451) {
+                if ($error_code == 1451) {
                     return $this->errorResponse('Can not remove this resource permanently. It is related with any other resources', 409);
                 }
+            case ($exception instanceof TokenMismatchException):
+                return redirect()->back()->withInput(request()->input());
             default:
                 return $this->errorResponse('Unexpected exception. Try later.', 500);
         endswitch;
@@ -89,6 +93,10 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        if ($this->isFrontend($request)) {
+            return redirect()->guest('login');
+        }
+
         return $this->errorResponse('Unauthenticated', 401);
     }
 
@@ -103,6 +111,22 @@ class Handler extends ExceptionHandler
     {
         $errors = $exception->validator->errors()->getMessages();
 
+        if ($this->isFrontend($request)) {
+            return $request->ajax() ? response()->json($errors, 422) :
+                redirect()->back()->withInput($request->input())->withErrors($errors);
+        }
+
         return $this->errorResponse($errors, 422);
+    }
+
+    /**
+     * Check either request is from API or from web.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return boolean
+     */
+    private function isFrontend(Request $request)
+    {
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
 }
