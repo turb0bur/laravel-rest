@@ -53,7 +53,7 @@ trait ApiResponser
     protected function filterData(Collection $collection, $transformer)
     {
         foreach (request()->query() as $parameter => $value) {
-            $attribute = $transformer::originalAtrribute($parameter);
+            $attribute = $transformer::originalAttribute($parameter);
             if (isset($attribute, $value)) {
                 $collection = $collection->where($attribute, $value);
             }
@@ -65,7 +65,7 @@ trait ApiResponser
     protected function sortData(Collection $collection, $transformer)
     {
         if (request()->has('sort_by')) {
-            $attribute  = $transformer::originalAtrribute(request()->sort_by);
+            $attribute  = $transformer::originalAttribute(request()->sort_by);
             $collection = $collection->sortBy->{$attribute};
         }
 
