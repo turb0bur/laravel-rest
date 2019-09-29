@@ -23,7 +23,14 @@ class UserTransformer extends TransformerAbstract
             'isAdmin'      => ($user->admin === 'true'),
             'creationDate' => (string)$user->created_at,
             'lastChanges'  => (string)$user->updated_at,
-            'deletionDate' => isset($user->deleted_at) ? (string)$user->deleted_at : null
+            'deletionDate' => isset($user->deleted_at) ? (string)$user->deleted_at : null,
+
+            'links' => [
+                [
+                    'rel'  => 'self',
+                    'href' => route('users.show', $user->id)
+                ],
+            ]
         ];
     }
 
