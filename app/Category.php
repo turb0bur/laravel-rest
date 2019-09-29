@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\CategoryTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,12 +10,14 @@ class Category extends Model
 {
     use SoftDeletes;
 
-    protected $dates = ['delete_at'];
+    public $transformer = CategoryTransformer::class;
+
+    protected $dates    = ['delete_at'];
     protected $fillable = [
         'name',
         'description'
     ];
-    protected $hidden = [
+    protected $hidden   = [
         'pivot'
     ];
 
