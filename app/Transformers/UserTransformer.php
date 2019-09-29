@@ -26,4 +26,20 @@ class UserTransformer extends TransformerAbstract
             'deletionDate' => isset($user->deleted_at) ? (string)$user->deleted_at : null
         ];
     }
+
+    public static function originalAtrribute($index)
+    {
+        $attributes = [
+            'id'           => 'id',
+            'name'         => 'name',
+            'email'        => 'email',
+            'isVerified'   => 'verified',
+            'isAdmin'      => 'admin',
+            'creationDate' => 'created_at',
+            'lastChanges'  => 'updated_at',
+            'deletionDate' => 'deleted_at'
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
