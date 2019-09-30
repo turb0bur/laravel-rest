@@ -7,6 +7,11 @@ use App\Http\Controllers\ApiController;
 
 class SellerBuyerController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +31,5 @@ class SellerBuyerController extends ApiController
             ->values();
 
         return $this->showAll($buyers);
-
     }
 }
