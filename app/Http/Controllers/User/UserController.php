@@ -132,6 +132,19 @@ class UserController extends ApiController
     }
 
     /**
+     * Return the current authenticated user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        $user = $request->user();
+
+        return $this->showOne($user);
+    }
+
+    /**
      * Verify user by token
      *
      * @param User $user
