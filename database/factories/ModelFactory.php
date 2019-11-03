@@ -18,6 +18,7 @@ use App\Product;
 use App\Seller;
 use App\Transaction;
 use App\User;
+use \Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
@@ -25,8 +26,8 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name'               => $faker->name,
         'email'              => $faker->unique()->safeEmail,
-        'password'           => $password ?: $password = bcrypt('secret'),
-        'remember_token'     => str_random(10),
+        'password'           => $password ?: $password = bcrypt('password'),
+        'remember_token'     => Str::random(10),
         'verified'           => $verified = $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
         'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),
         'admin'              => $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER])
