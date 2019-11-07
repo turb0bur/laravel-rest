@@ -9,6 +9,7 @@
 /.idea
 .cache
 /.vagrant
+/laradock
 Homestead.json
 Homestead.yaml
 npm-debug.log
