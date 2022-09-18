@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Category;
 use App\Product;
 use App\Transaction;
@@ -34,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $productsQuantity     = 1000;
         $transactionsQuantity = 1000;
 
+        //TODO Refactor model factories to the Laravel 8 approach
         factory(User::class, $usersQuantity)->create();
         factory(Category::class, $categoriesQuantity)->create();
         factory(Product::class, $productsQuantity)->create()->each(

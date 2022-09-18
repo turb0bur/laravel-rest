@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Factories;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -20,7 +22,7 @@ use App\Transaction;
 use App\User;
 use \Illuminate\Support\Str;
 
-$factory->define(User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function ($faker) {
     static $password;
 
     return [
@@ -34,14 +36,14 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Category::class, function (Faker\Generator $faker) {
+$factory->define(Category::class, function ($faker) {
     return [
         'name'        => $faker->word,
         'description' => $faker->paragraph(1),
     ];
 });
 
-$factory->define(Product::class, function (Faker\Generator $faker) {
+$factory->define(Product::class, function ($faker) {
     return [
         'name'        => $faker->word,
         'description' => $faker->paragraph(1),
@@ -52,7 +54,7 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Transaction::class, function (Faker\Generator $faker) {
+$factory->define(Transaction::class, function ($faker) {
     $seller = Seller::has('products')->get()->random();
     $buyer  = User::all()->except($seller->id)->random();
 
