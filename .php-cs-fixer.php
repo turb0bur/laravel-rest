@@ -143,5 +143,5 @@ return (new Config())
     ->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)
-    ->setLineEnding("\r\n")
+    ->setLineEnding("\n")
     ->setUsingCache(true);
