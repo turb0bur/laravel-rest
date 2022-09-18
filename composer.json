@@ -16,6 +16,7 @@
     "laravel/passport": "^10.0",
     "laravel/tinker": "^2.7",
     "laravel/ui": "^3.4",
+    "laravel/vapor-core": "^2.23",
     "spatie/laravel-fractal": "^6.0"
   },
   "require-dev": {
