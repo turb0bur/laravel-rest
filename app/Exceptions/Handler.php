@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
      * @param \Exception $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(\Throwable $exception)
     {
         parent::report($exception);
     }
@@ -56,10 +56,10 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response and add CORS headers to pesponse.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $exception
+     * @param \Throwable               $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, \Throwable $exception)
     {
         $response = $this->handleException($request, $exception);
         app(CorsService::class)->addActualRequestHeaders($response, $request);
@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler
      * @param \Exception               $exception
      * @return \Illuminate\Http\Response
      */
-    public function handleException($request, Exception $exception)
+    public function handleException($request, \Throwable $exception)
     {
         switch (true):
             case ($exception instanceof ValidationException):
