@@ -12,13 +12,13 @@ class Category extends Model
 
     public $transformer = CategoryTransformer::class;
 
-    protected $dates    = ['delete_at'];
+    protected $dates = ['delete_at'];
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
-    protected $hidden   = [
-        'pivot'
+    protected $hidden = [
+        'pivot',
     ];
 
     public function products()

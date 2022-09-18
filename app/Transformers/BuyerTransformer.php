@@ -16,40 +16,40 @@ class BuyerTransformer extends TransformerAbstract
     public function transform(Buyer $buyer)
     {
         return [
-            'id'           => (int)$buyer->id,
-            'name'         => (string)$buyer->name,
-            'email'        => (string)$buyer->email,
-            'isVerified'   => (int)$buyer->verified,
-            'creationDate' => (string)$buyer->created_at,
-            'lastChanges'  => (string)$buyer->updated_at,
-            'deletionDate' => isset($buyer->deleted_at) ? (string)$buyer->deleted_at : null,
+            'id'           => (int) $buyer->id,
+            'name'         => (string) $buyer->name,
+            'email'        => (string) $buyer->email,
+            'isVerified'   => (int) $buyer->verified,
+            'creationDate' => (string) $buyer->created_at,
+            'lastChanges'  => (string) $buyer->updated_at,
+            'deletionDate' => isset($buyer->deleted_at) ? (string) $buyer->deleted_at : null,
 
             'links' => [
                 [
                     'rel'  => 'self',
-                    'href' => route('buyers.show', $buyer->id)
+                    'href' => route('buyers.show', $buyer->id),
                 ],
                 [
                     'rel'  => 'user',
-                    'href' => route('users.show', $buyer->id)
+                    'href' => route('users.show', $buyer->id),
                 ],
                 [
                     'rel'  => 'buyer.sellers',
-                    'href' => route('buyers.sellers.index', $buyer->id)
+                    'href' => route('buyers.sellers.index', $buyer->id),
                 ],
                 [
                     'rel'  => 'buyer.categories',
-                    'href' => route('buyers.categories.index', $buyer->id)
+                    'href' => route('buyers.categories.index', $buyer->id),
                 ],
                 [
                     'rel'  => 'buyer.products',
-                    'href' => route('buyers.products.index', $buyer->id)
+                    'href' => route('buyers.products.index', $buyer->id),
                 ],
                 [
                     'rel'  => 'buyer.transactions',
-                    'href' => route('buyers.transactions.index', $buyer->id)
+                    'href' => route('buyers.transactions.index', $buyer->id),
                 ],
-            ]
+            ],
         ];
     }
 

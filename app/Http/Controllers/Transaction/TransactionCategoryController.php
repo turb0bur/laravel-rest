@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Transaction;
 
-use App\Transaction;
 use App\Http\Controllers\ApiController;
+use App\Transaction;
 
 class TransactionCategoryController extends ApiController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('client.credentials')->only(['index']);
     }
 
@@ -16,7 +18,7 @@ class TransactionCategoryController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Transaction $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Transaction $transaction)
     {

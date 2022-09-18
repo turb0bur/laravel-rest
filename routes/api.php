@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-/**
+/*
  * |--------------------------------------------------------------------------
  * | API Routes
  * |--------------------------------------------------------------------------
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
  * |
  */
 
-/**
+/*
  * Users
  */
 Route::name('me')->get('users/me', 'User\UserController@me');
@@ -21,7 +22,7 @@ Route::resource('users', 'User\UserController')->except('create', 'edit');
 Route::name('verify')->get('users/verify/{token}', 'User\UserController@verify');
 Route::name('confirm')->get('users/{user}/resend', 'User\UserController@resend');
 
-/**
+/*
  * Buyers
  */
 Route::resource('buyers', 'Buyer\BuyerController')->only('index', 'show');
@@ -30,7 +31,7 @@ Route::resource('buyers.products', 'Buyer\BuyerProductController')->only('index'
 Route::resource('buyers.sellers', 'Buyer\BuyerSellerController')->only('index');
 Route::resource('buyers.categories', 'Buyer\BuyerCategoryController')->only('index');
 
-/**
+/*
  * Sellers
  */
 Route::resource('sellers', 'Seller\SellerController')->only('index', 'show');
@@ -39,7 +40,7 @@ Route::resource('sellers.categories', 'Seller\SellerCategoryController')->only('
 Route::resource('sellers.buyers', 'Seller\SellerBuyerController')->only('index');
 Route::resource('sellers.products', 'Seller\SellerProductController')->except('create', 'show', 'edit');
 
-/**
+/*
  * Products
  */
 Route::resource('products', 'Product\ProductController')->only('index', 'show');
@@ -48,7 +49,7 @@ Route::resource('products.buyers', 'Product\ProductBuyerController')->only('inde
 Route::resource('products.categories', 'Product\ProductCategoryController')->except('create', 'show', 'edit');
 Route::resource('products.buyers.transactions', 'Product\ProductBuyerTransactionController')->only('store');
 
-/**
+/*
  * Categories
  */
 Route::resource('categories', 'Category\CategoryController')->except('create', 'edit');
@@ -57,7 +58,7 @@ Route::resource('categories.sellers', 'Category\CategorySellerController')->only
 Route::resource('categories.transactions', 'Category\CategoryTransactionController')->only('index');
 Route::resource('categories.buyers', 'Category\CategoryBuyerController')->only('index');
 
-/**
+/*
  * Transactions
  */
 Route::resource('transactions', 'Transaction\TransactionController')->only('index', 'show');

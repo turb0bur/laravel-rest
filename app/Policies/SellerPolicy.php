@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Seller;
 use App\Traits\AdminAction;
 use App\User;
-use App\Seller;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SellerPolicy
@@ -16,7 +16,7 @@ class SellerPolicy
      *
      * @param \App\User   $user
      * @param \App\Seller $seller
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, Seller $seller)
     {
@@ -28,7 +28,7 @@ class SellerPolicy
      *
      * @param \App\User   $user
      * @param \App\Seller $seller
-     * @return boolean
+     * @return bool
      */
     public function sale(User $user, Seller $seller)
     {
@@ -40,7 +40,7 @@ class SellerPolicy
      *
      * @param \App\User   $user
      * @param \App\Seller $seller
-     * @return boolean
+     * @return bool
      */
     public function editProduct(User $user, Seller $seller)
     {
@@ -52,7 +52,7 @@ class SellerPolicy
      *
      * @param \App\User   $user
      * @param \App\Seller $seller
-     * @return boolean
+     * @return bool
      */
     public function deleteProduct(User $user, Seller $seller)
     {

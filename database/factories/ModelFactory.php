@@ -13,14 +13,14 @@ namespace Database\Factories;
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/* @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Category;
 use App\Product;
 use App\Seller;
 use App\Transaction;
 use App\User;
-use \Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 $factory->define(User::class, function ($faker) {
     static $password;
@@ -32,7 +32,7 @@ $factory->define(User::class, function ($faker) {
         'remember_token'     => Str::random(10),
         'verified'           => $verified = $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
         'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),
-        'admin'              => $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER])
+        'admin'              => $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
     ];
 });
 
@@ -56,11 +56,11 @@ $factory->define(Product::class, function ($faker) {
 
 $factory->define(Transaction::class, function ($faker) {
     $seller = Seller::has('products')->get()->random();
-    $buyer  = User::all()->except($seller->id)->random();
+    $buyer = User::all()->except($seller->id)->random();
 
     return [
         'quantity'   => $faker->numberBetween(1, 3),
         'buyer_id'   => $buyer->id,
-        'product_id' => $seller->products->random()->id
+        'product_id' => $seller->products->random()->id,
     ];
 });

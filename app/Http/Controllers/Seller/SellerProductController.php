@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Http\Controllers\ApiController;
 use App\Product;
 use App\Seller;
 use App\Transformers\ProductTransformer;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -18,7 +18,7 @@ class SellerProductController extends ApiController
     {
         parent::__construct();
 
-        $this->middleware('transform.input:' . ProductTransformer::class)->only(['store', 'update']);
+        $this->middleware('transform.input:'.ProductTransformer::class)->only(['store', 'update']);
         $this->middleware('scope:manage-products')->except('index');
         $this->middleware('can:view,seller')->only('index');
         $this->middleware('can:sale,seller')->only('store');
@@ -31,7 +31,8 @@ class SellerProductController extends ApiController
      *
      * @param \App\Seller $seller
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function index(Seller $seller)
     {
@@ -48,7 +49,7 @@ class SellerProductController extends ApiController
      *
      * @param \App\User                $seller
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, User $seller)
     {
@@ -56,14 +57,14 @@ class SellerProductController extends ApiController
             'name'        => 'required',
             'description' => 'required',
             'quantity'    => 'required|integer|min:1',
-            'image'       => 'required|image'
+            'image'       => 'required|image',
         ];
 
         $this->validate($request, $rules);
 
-        $data              = $request->all();
-        $data['status']    = Product::UNAVAILABLE_PRODUCT;
-        $data['image']     = $request->image->store('');
+        $data = $request->all();
+        $data['status'] = Product::UNAVAILABLE_PRODUCT;
+        $data['image'] = $request->image->store('');
         $data['seller_id'] = $seller->id;
 
         $product = Product::create($data);
@@ -77,14 +78,14 @@ class SellerProductController extends ApiController
      * @param \Illuminate\Http\Request $request
      * @param \App\Seller              $seller
      * @param \App\Product             $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Seller $seller, Product $product)
     {
         $rules = [
             'quantity' => 'integer|min:1',
-            'status'   => 'in:' . Product::AVAILABLE_PRODUCT . ',' . Product::UNAVAILABLE_PRODUCT,
-            'image'    => 'image'
+            'status'   => 'in:'.Product::AVAILABLE_PRODUCT.','.Product::UNAVAILABLE_PRODUCT,
+            'image'    => 'image',
         ];
 
         $this->validate($request, $rules);
@@ -119,7 +120,7 @@ class SellerProductController extends ApiController
      *
      * @param \App\Seller  $seller
      * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Seller $seller, Product $product)
     {

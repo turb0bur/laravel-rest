@@ -26,11 +26,11 @@ trait ApiResponser
             return $this->successResponse(['data' => $collection], $code);
         }
         $transformer = $collection->first()->transformer;
-        $collection  = $this->filterData($collection, $transformer);
-        $collection  = $this->sortData($collection, $transformer);
-        $collection  = $this->paginate($collection);
-        $collection  = $this->transformData($collection, $transformer);
-        $collection  = $this->cacheResponse($collection);
+        $collection = $this->filterData($collection, $transformer);
+        $collection = $this->sortData($collection, $transformer);
+        $collection = $this->paginate($collection);
+        $collection = $this->transformData($collection, $transformer);
+        $collection = $this->cacheResponse($collection);
 
         return $this->successResponse($collection, $code);
     }
@@ -38,7 +38,7 @@ trait ApiResponser
     protected function showOne(Model $instance, $code = 200)
     {
         $transformer = $instance->first()->transformer;
-        $instance    = $this->transformData($instance, $transformer);
+        $instance = $this->transformData($instance, $transformer);
 
         return $this->successResponse($instance, $code);
     }
@@ -63,7 +63,7 @@ trait ApiResponser
     protected function sortData(Collection $collection, $transformer)
     {
         if (request()->has('sort_by')) {
-            $attribute  = $transformer::originalAttribute(request()->sort_by);
+            $attribute = $transformer::originalAttribute(request()->sort_by);
             $collection = $collection->sortBy->{$attribute};
         }
 
@@ -73,16 +73,16 @@ trait ApiResponser
     protected function paginate(Collection $collection)
     {
         $rules = [
-            'per_page' => 'integer|min:2|max:50'
+            'per_page' => 'integer|min:2|max:50',
         ];
         Validator::validate(request()->all(), $rules);
 
         $page = LengthAwarePaginator::resolveCurrentPage();
         request()->has('per_page') ? $perPage = request()->per_page : $perPage = 15;
 
-        $result    = $collection->slice(($page - 1) * $perPage, $perPage)->values();
+        $result = $collection->slice(($page - 1) * $perPage, $perPage)->values();
         $paginated = new LengthAwarePaginator($result, $collection->count(), $perPage, $page, [
-            'path' => LengthAwarePaginator::resolveCurrentPath()
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
         ]);
         $paginated->appends(request()->all());
 
@@ -98,13 +98,13 @@ trait ApiResponser
 
     protected function cacheResponse($data)
     {
-        $url         = request()->url();
+        $url = request()->url();
         $queryParams = request()->query();
 
         ksort($queryParams);
 
         $queryString = http_build_query($queryParams);
-        $fullUrl     = "{$url}?{$queryString}";
+        $fullUrl = "{$url}?{$queryString}";
 
         return Cache::remember($fullUrl, 30 / 60, function () use ($data) {
             return $data;

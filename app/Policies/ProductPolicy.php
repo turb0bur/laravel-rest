@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Product;
 use App\Traits\AdminAction;
 use App\User;
-use App\Product;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
@@ -16,7 +16,7 @@ class ProductPolicy
      *
      * @param  \App\User  $user
      * @param  \App\Product  $product
-     * @return boolean
+     * @return bool
      */
     public function addCategory(User $user, Product $product)
     {
@@ -28,7 +28,7 @@ class ProductPolicy
      *
      * @param  \App\User  $user
      * @param  \App\Product  $product
-     * @return boolean
+     * @return bool
      */
     public function deleteCategory(User $user, Product $product)
     {

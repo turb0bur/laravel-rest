@@ -3,23 +3,26 @@
 namespace App\Http\Controllers\Category;
 
 use App\Category;
-use App\Transformers\CategoryTransformer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Transformers\CategoryTransformer;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Request;
 
 class CategoryController extends ApiController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('client.credentials')->only(['index', 'show']);
         $this->middleware('auth:api')->except(['index', 'show']);
-        $this->middleware('transform.input:' . CategoryTransformer::class)->only(['store', 'update']);
+        $this->middleware('transform.input:'.CategoryTransformer::class)->only(['store', 'update']);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -32,7 +35,8 @@ class CategoryController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function store(Request $request)
     {
@@ -40,7 +44,7 @@ class CategoryController extends ApiController
 
         $rules = [
             'name'        => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ];
 
         $this->validate($request, $rules);
@@ -54,7 +58,7 @@ class CategoryController extends ApiController
      * Display the specified resource.
      *
      * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Category $category)
     {
@@ -65,8 +69,9 @@ class CategoryController extends ApiController
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Category            $category
-     * @return \Illuminate\Http\Response
+     * @param \App\Category $category
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function update(Request $request, Category $category)
     {
@@ -75,19 +80,20 @@ class CategoryController extends ApiController
         $category->fill($request->only(['name', 'description']));
 
         if ($category->isClean()) {
-            return $this->errorResponse('You need to specify any different value to update');
+            return $this->errorResponse('You need to specify any different value to update', 422);
         }
 
         $category->save();
 
-        return $this->showOne();
+        return $this->showOne($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy(Category $category)
     {

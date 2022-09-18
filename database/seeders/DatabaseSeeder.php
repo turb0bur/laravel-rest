@@ -31,16 +31,16 @@ class DatabaseSeeder extends Seeder
         Product::flushEventListeners();
         Transaction::flushEventListeners();
 
-        $usersQuantity        = 1000;
-        $categoriesQuantity   = 30;
-        $productsQuantity     = 1000;
+        $usersQuantity = 1000;
+        $categoriesQuantity = 30;
+        $productsQuantity = 1000;
         $transactionsQuantity = 1000;
 
         //TODO Refactor model factories to the Laravel 8 approach
         factory(User::class, $usersQuantity)->create();
         factory(Category::class, $categoriesQuantity)->create();
         factory(Product::class, $productsQuantity)->create()->each(
-            function ($product) {
+            function (Product $product) {
                 $categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
                 $product->categories()->attach($categories);
             }

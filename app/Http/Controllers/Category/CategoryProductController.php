@@ -9,6 +9,8 @@ class CategoryProductController extends ApiController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('client.credentials')->only(['index']);
     }
 
@@ -16,7 +18,7 @@ class CategoryProductController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Category $category)
     {

@@ -4,8 +4,8 @@ namespace App;
 
 use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
@@ -13,10 +13,10 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, SoftDeletes;
 
-    const VERIFIED_USER   = '1';
+    const VERIFIED_USER = '1';
     const UNVERIFIED_USER = '0';
 
-    const ADMIN_USER   = 'true';
+    const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
 
     public $transformer = UserTransformer::class;
@@ -35,7 +35,7 @@ class User extends Authenticatable
         'password',
         'verified',
         'verification_token',
-        'admin'
+        'admin',
     ];
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'verification_token'
+        'verification_token',
     ];
 
     public function setNameAttribute($name)

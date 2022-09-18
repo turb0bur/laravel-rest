@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Buyer;
 use App\Traits\AdminAction;
 use App\User;
-use App\Buyer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BuyerPolicy
@@ -16,7 +16,7 @@ class BuyerPolicy
      *
      * @param \App\User  $user
      * @param \App\Buyer $buyer
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, Buyer $buyer)
     {
@@ -28,7 +28,7 @@ class BuyerPolicy
      *
      * @param \App\User  $user
      * @param \App\Buyer $buyer
-     * @return boolean
+     * @return bool
      */
     public function purchase(User $user, Buyer $buyer)
     {

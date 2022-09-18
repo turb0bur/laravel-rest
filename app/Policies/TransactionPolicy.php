@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use App\Traits\AdminAction;
-use App\User;
 use App\Transaction;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TransactionPolicy
@@ -16,7 +16,7 @@ class TransactionPolicy
      *
      * @param \App\User        $user
      * @param \App\Transaction $transaction
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, Transaction $transaction)
     {

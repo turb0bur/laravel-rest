@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\ApiController;
 use App\Product;
 use App\Transaction;
 use App\Transformers\TransactionTransformer;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\DB;
 
 class ProductBuyerTransactionController extends ApiController
@@ -16,7 +16,7 @@ class ProductBuyerTransactionController extends ApiController
     {
         parent::__construct();
 
-        $this->middleware('transform.input:' . TransactionTransformer::class)->only('store');
+        $this->middleware('transform.input:'.TransactionTransformer::class)->only('store');
         $this->middleware('scope:purchase-product')->only('store');
         $this->middleware('can:purchase, buyer')->only('store');
     }
@@ -27,12 +27,12 @@ class ProductBuyerTransactionController extends ApiController
      * @param \Illuminate\Http\Request $request
      * @param \App\Product             $product
      * @param \App\User                $buyer
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, Product $product, User $buyer)
     {
         $rules = [
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
         ];
 
         $this->validate($request, $rules);
@@ -40,13 +40,13 @@ class ProductBuyerTransactionController extends ApiController
         if ($buyer->id == $product->seller->id) {
             return $this->errorResponse('The buyer must be different from the seller', 409);
         }
-        if (!$buyer->isVerified()) {
+        if (! $buyer->isVerified()) {
             return $this->errorResponse('The buyer must be verified user', 409);
         }
-        if (!$product->seller->isVerified()) {
+        if (! $product->seller->isVerified()) {
             return $this->errorResponse('The seller must be verified user', 409);
         }
-        if (!$product->isAvailable()) {
+        if (! $product->isAvailable()) {
             return $this->errorResponse('The product must be available', 409);
         }
         if ($product->quantity < $request->quantity) {
@@ -60,11 +60,10 @@ class ProductBuyerTransactionController extends ApiController
             $transaction = Transaction::create([
                 'quantity'   => $request->quantity,
                 'buyer_id'   => $buyer->id,
-                'product_id' => $product->id
+                'product_id' => $product->id,
             ]);
 
             return $this->showOne($transaction, 201);
         });
-
     }
 }

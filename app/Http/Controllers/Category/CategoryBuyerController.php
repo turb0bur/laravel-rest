@@ -16,7 +16,7 @@ class CategoryBuyerController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Category $category)
     {

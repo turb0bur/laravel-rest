@@ -10,22 +10,22 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    const AVAILABLE_PRODUCT   = 'available';
+    const AVAILABLE_PRODUCT = 'available';
     const UNAVAILABLE_PRODUCT = 'unavailable';
 
     public $transformer = ProductTransformer::class;
 
-    protected $dates    = ['deleted_at'];
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'name',
         'description',
         'quantity',
         'status',
         'image',
-        'seller_id'
+        'seller_id',
     ];
-    protected $hidden   = [
-        'pivot'
+    protected $hidden = [
+        'pivot',
     ];
 
     public function isAvailable()

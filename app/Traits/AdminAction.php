@@ -7,16 +7,14 @@ use App\User;
 trait AdminAction
 {
     /**
-     * Check before an action whether the authenticated user is an admin
+     * Check before an action whether the authenticated user is an admin.
      *
      * @param \App\User $user
      * @param           $ability
-     * @return boolean
+     * @return bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability): bool
     {
-        if($user->isAdmin()){
-            return true;
-        }
+        return $user->isAdmin();
     }
 }

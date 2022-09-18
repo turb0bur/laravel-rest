@@ -13,8 +13,8 @@ use App\Seller;
 use App\Transaction;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('admin-action', function ($user){
+        Gate::define('admin-action', function ($user) {
             return $user->isAdmin();
         });
 
@@ -55,7 +55,7 @@ class AuthServiceProvider extends ServiceProvider
             'manage-account'   => 'Read your account data (id, name, email) if verified, and if admin (cannot read password).
                 Modify your account data (email and password). Can not delete your account.',
             'read-general'     => 'Read general information like purchasing categories, purchased products, selling products, selling categories,
-                your transactions(purchasing and sales)'
+                your transactions(purchasing and sales)',
         ]);
     }
 }

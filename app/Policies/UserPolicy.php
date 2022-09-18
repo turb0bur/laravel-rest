@@ -15,7 +15,7 @@ class UserPolicy
      *
      * @param \App\User $user
      * @param \App\User $model
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, User $model)
     {
@@ -27,7 +27,7 @@ class UserPolicy
      *
      * @param \App\User $user
      * @param \App\User $model
-     * @return boolean
+     * @return bool
      */
     public function update(User $user, User $model)
     {
@@ -39,7 +39,7 @@ class UserPolicy
      *
      * @param \App\User $user
      * @param \App\User $model
-     * @return boolean
+     * @return bool
      */
     public function delete(User $user, User $model)
     {

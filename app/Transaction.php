@@ -12,11 +12,11 @@ class Transaction extends Model
 
     public $transformer = TransactionTransformer::class;
 
-    protected $dates    = ['deleted_at'];
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'quantity',
         'buyer_id',
-        'product_id'
+        'product_id',
     ];
 
     public function buyer()

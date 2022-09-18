@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Product;
 use App\Http\Controllers\ApiController;
+use App\Product;
 
 class ProductTransactionController extends ApiController
 {
@@ -16,7 +16,7 @@ class ProductTransactionController extends ApiController
      * Display a listing of the resource.
      *
      * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Product $product)
     {

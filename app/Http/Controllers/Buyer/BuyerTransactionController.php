@@ -18,7 +18,7 @@ class BuyerTransactionController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Buyer $buyer
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Buyer $buyer)
     {

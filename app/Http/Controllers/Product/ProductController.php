@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Product;
 use App\Http\Controllers\ApiController;
+use App\Product;
 
 class ProductController extends ApiController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -27,7 +30,7 @@ class ProductController extends ApiController
      * Display the specified resource.
      *
      * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Product $product)
     {

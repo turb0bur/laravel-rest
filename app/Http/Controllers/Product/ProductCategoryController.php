@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Product;
 
 use App\Category;
+use App\Http\Controllers\ApiController;
 use App\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;
 
-class productcategorycontroller extends apicontroller
+class ProductCategoryController extends ApiController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('client.credentials')->only('index');
         $this->middleware('auth:api')->except('index');
         $this->middleware('scope:manage-products')->except('index');
@@ -22,13 +24,13 @@ class productcategorycontroller extends apicontroller
      * display a listing of the resource.
      *
      * @param \app\product $product
-     * @return \illuminate\http\response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(product $product)
     {
         $categories = $product->categories;
 
-        return $this->showall($categories);
+        return $this->showAll($categories);
     }
 
     /**
@@ -37,13 +39,13 @@ class productcategorycontroller extends apicontroller
      * @param \illuminate\http\request $request
      * @param \app\product             $product
      * @param \app\category            $category
-     * @return \illuminate\http\response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(request $request, product $product, category $category)
     {
         $product->categories()->syncwithoutdetaching([$category->id]);
 
-        return $this->showall($product->categories);
+        return $this->showAll($product->categories);
     }
 
     /**
@@ -51,16 +53,16 @@ class productcategorycontroller extends apicontroller
      *
      * @param \app\product  $product
      * @param \app\category $category
-     * @return \illuminate\http\response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(product $product, category $category)
     {
-        if (!$product->categories()->find($category->id)) {
-            return $this->errorresponse('the specified category is not a category of this product', 404);
+        if (! $product->categories()->find($category->id)) {
+            return $this->errorResponse('the specified category is not a category of this product', 404);
         }
 
         $product->categories()->detach($category->id);
 
-        return $this->showall($product->categories);
+        return $this->showAll($product->categories);
     }
 }

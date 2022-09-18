@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Seller;
 use App\Http\Controllers\ApiController;
+use App\Seller;
 
 class SellerCategoryController extends ApiController
 {
@@ -18,7 +18,7 @@ class SellerCategoryController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Seller $seller
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Seller $seller)
     {

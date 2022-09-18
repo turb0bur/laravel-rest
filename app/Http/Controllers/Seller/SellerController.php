@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Seller;
 use App\Http\Controllers\ApiController;
+use App\Seller;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class SellerController extends ApiController
 {
@@ -17,7 +18,8 @@ class SellerController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function index()
     {
@@ -32,7 +34,7 @@ class SellerController extends ApiController
      * Display the specified resource.
      *
      * @param Seller $seller
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Seller $seller)
     {

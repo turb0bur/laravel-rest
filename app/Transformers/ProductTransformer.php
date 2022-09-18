@@ -16,39 +16,39 @@ class ProductTransformer extends TransformerAbstract
     public function transform(Product $product)
     {
         return [
-            'id'           => (int)$product->id,
-            'title'        => (string)$product->name,
-            'details'      => (string)$product->description,
-            'stock'        => (int)$product->quantity,
-            'situation'    => (int)$product->status,
+            'id'           => (int) $product->id,
+            'title'        => (string) $product->name,
+            'details'      => (string) $product->description,
+            'stock'        => (int) $product->quantity,
+            'situation'    => (int) $product->status,
             'picture'      => url("img/{$product->image}"),
-            'seller'       => (int)$product->seller_id,
-            'creationDate' => (string)$product->created_at,
-            'lastChanges'  => (string)$product->updated_at,
-            'deletionDate' => isset($product->deleted_at) ? (string)$product->deleted_at : null,
+            'seller'       => (int) $product->seller_id,
+            'creationDate' => (string) $product->created_at,
+            'lastChanges'  => (string) $product->updated_at,
+            'deletionDate' => isset($product->deleted_at) ? (string) $product->deleted_at : null,
 
             'links' => [
                 [
                     'rel'  => 'self',
-                    'href' => route('products.show', $product->id)
+                    'href' => route('products.show', $product->id),
                 ],
                 [
                     'rel'  => 'product.buyers',
-                    'href' => route('products.buyers.index', $product->id)
+                    'href' => route('products.buyers.index', $product->id),
                 ],
                 [
                     'rel'  => 'sellers',
-                    'href' => route('sellers.show', $product->seller_id)
+                    'href' => route('sellers.show', $product->seller_id),
                 ],
                 [
                     'rel'  => 'product.categories',
-                    'href' => route('products.categories.index', $product->id)
+                    'href' => route('products.categories.index', $product->id),
                 ],
                 [
                     'rel'  => 'product.transactions',
-                    'href' => route('products.transactions.index', $product->id)
+                    'href' => route('products.transactions.index', $product->id),
                 ],
-            ]
+            ],
         ];
     }
 
@@ -64,7 +64,7 @@ class ProductTransformer extends TransformerAbstract
             'seller'       => 'seller_id',
             'creationDate' => 'created_at',
             'lastChanges'  => 'updated_at',
-            'deletionDate' => 'deleted_at'
+            'deletionDate' => 'deleted_at',
         ];
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
