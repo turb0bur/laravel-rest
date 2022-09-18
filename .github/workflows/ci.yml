@@ -31,13 +31,17 @@ jobs:
       - name: Code Style Analysis
         run: composer run lint
 
-#      - name: Static Code Analysis
-#        run: composer run static-code-analysis
+      #      - name: Static Code Analysis
+      #        run: composer run static-code-analysis
 
       - name: Run Testsuite
         run: composer run test
 
-      - name: Deploy to Laravel Vapor
+      - name: Require Vapor CLI
+        run: composer global require laravel/vapor-cli
+
+      - name: Deploy to AWS via Vapor
         run: |
-          export VAPOR_API_TOKEN="${{ secrets.VAPOR_API_TOKEN }}"
           vapor deploy production
+        env:
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
