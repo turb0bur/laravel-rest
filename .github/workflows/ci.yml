@@ -37,11 +37,11 @@ jobs:
       - name: Run Testsuite
         run: composer run test
 
-      - name: Require Vapor CLI
-        run: composer global require laravel/vapor-cli
+#      - name: Require Vapor CLI
+#        run: composer global require laravel/vapor-cli
 
-      - name: Deploy to AWS via Vapor
-        run: |
-          vapor deploy production
-        env:
-          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+#      - name: Deploy to AWS via Vapor
+#        run: |
+#          vapor deploy production
+#        env:
+#          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
