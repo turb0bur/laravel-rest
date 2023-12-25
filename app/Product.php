@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Transformers\ProductTransformer;
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     public const AVAILABLE_PRODUCT = 'available';
 
@@ -30,6 +33,11 @@ class Product extends Model
     protected $hidden = [
         'pivot',
     ];
+
+    protected static function newFactory(): ProductFactory
+    {
+        return ProductFactory::new();
+    }
 
     public function isAvailable(): bool
     {
