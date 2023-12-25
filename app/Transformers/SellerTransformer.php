@@ -16,10 +16,10 @@ class SellerTransformer extends TransformerAbstract
     public function transform(Seller $seller)
     {
         return [
-            'id'           => (int) $seller->id,
-            'name'         => (string) $seller->name,
-            'email'        => (string) $seller->email,
-            'isVerified'   => (int) $seller->verified,
+            'id'           => $seller->id,
+            'name'         => $seller->name,
+            'email'        => $seller->email,
+            'isVerified'   => $seller->is_verified,
             'creationDate' => (string) $seller->created_at,
             'lastChanges'  => (string) $seller->updated_at,
             'deletionDate' => isset($seller->deleted_at) ? (string) $seller->deleted_at : null,

@@ -58,7 +58,7 @@ class UserController extends ApiController
         $data['password'] = bcrypt($request->password);
         $data['verified'] = User::UNVERIFIED_USER;
         $data['verification_token'] = User::generateVerificationCode();
-        $data['admin'] = User::REGULAR_USER;
+        $data['is_admin'] = User::REGULAR_USER;
 
         $user = User::create($data);
 
@@ -88,7 +88,7 @@ class UserController extends ApiController
         $rules = [
             'email'    => 'email|unique:users,email,'.$user->id,
             'password' => 'min:6|confirmed',
-            'admin'    => 'in:'.User::ADMIN_USER.','.User::REGULAR_USER,
+            'is_admin'    => 'in:'.User::ADMIN_USER.','.User::REGULAR_USER,
         ];
 
         $this->validate($request, $rules);
@@ -98,17 +98,17 @@ class UserController extends ApiController
         }
 
         if ($request->has('email') && $request->email != $user->email) {
-            $user->verified = User::UNVERIFIED_USER;
+            $user->is_verified = User::UNVERIFIED_USER;
             $user->verification_token = User::generateVerificationCode();
             $user->email = $request->email;
         }
 
-        if ($request->has('admin')) {
+        if ($request->has('is_admin')) {
             $this->allowedAdminAction();
             if (! $user->isVerified()) {
                 return $this->errorResponse('Only verified users can modify the admin field', 409);
             }
-            $user->admin = $request->admin;
+            $user->is_admin = $request->is_admin;
         }
 
         if (! $user->isDirty()) {
@@ -156,7 +156,7 @@ class UserController extends ApiController
     {
         $user = User::where('verification_token', $token)->firstOrFail();
 
-        $user->verified = User::VERIFIED_USER;
+        $user->is_verified = User::VERIFIED_USER;
         $user->verification_token = null;
 
         $user->save();

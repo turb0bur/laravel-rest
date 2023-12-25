@@ -9,21 +9,18 @@ class UserTransformer extends TransformerAbstract
 {
     /**
      * A Fractal transformer.
-     *
-     * @param User $user
-     * @return array
      */
-    public function transform(User $user)
+    public function transform(User $user): array
     {
         return [
-            'id'           => (int) $user->id,
-            'name'         => (string) $user->name,
-            'email'        => (string) $user->email,
-            'isVerified'   => (int) $user->verified,
-            'isAdmin'      => ($user->admin === 'true'),
-            'creationDate' => (string) $user->created_at,
-            'lastChanges'  => (string) $user->updated_at,
-            'deletionDate' => isset($user->deleted_at) ? (string) $user->deleted_at : null,
+            'id'           => (int)$user->id,
+            'name'         => (string)$user->name,
+            'email'        => (string)$user->email,
+            'isVerified'   => (bool)$user->is_verified,
+            'isAdmin'      => (bool)$user->is_admin,
+            'creationDate' => (string)$user->created_at,
+            'lastChanges'  => (string)$user->updated_at,
+            'deletionDate' => isset($user->deleted_at) ? (string)$user->deleted_at : null,
 
             'links' => [
                 [
@@ -34,35 +31,35 @@ class UserTransformer extends TransformerAbstract
         ];
     }
 
-    public static function originalAttribute($index)
+    public static function originalAttribute(string $index): bool|null
     {
         $attributes = [
             'id'           => 'id',
             'name'         => 'name',
             'email'        => 'email',
-            'isVerified'   => 'verified',
-            'isAdmin'      => 'admin',
+            'isVerified'   => 'is_verified',
+            'isAdmin'      => 'is_admin',
             'creationDate' => 'created_at',
             'lastChanges'  => 'updated_at',
             'deletionDate' => 'deleted_at',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 
-    public static function transformedAttribute($index)
+    public static function transformedAttribute(string $index): bool|null
     {
         $attributes = [
-            'id'         => 'id',
-            'name'       => 'name',
-            'email'      => 'email',
-            'verified'   => 'isVerified',
-            'admin'      => 'isAdmin',
-            'created_at' => 'creationDate',
-            'updated_at' => 'lastChanges',
-            'deleted_at' => 'deletionDate',
+            'id'          => 'id',
+            'name'        => 'name',
+            'email'       => 'email',
+            'is_verified' => 'isVerified',
+            'is_admin'    => 'isAdmin',
+            'created_at'  => 'creationDate',
+            'updated_at'  => 'lastChanges',
+            'deleted_at'  => 'deletionDate',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 }

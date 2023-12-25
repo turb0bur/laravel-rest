@@ -15,17 +15,22 @@ class User extends Authenticatable
     use HasApiTokens;
     use SoftDeletes;
 
-    public const VERIFIED_USER = '1';
+    public const VERIFIED_USER = true;
 
-    public const UNVERIFIED_USER = '0';
+    public const UNVERIFIED_USER = false;
 
-    public const ADMIN_USER = 'true';
+    public const ADMIN_USER = true;
 
-    public const REGULAR_USER = 'false';
+    public const REGULAR_USER = false;
 
     public string $transformer = UserTransformer::class;
 
     protected $table = 'users';
+
+    protected $casts = [
+        'is_admin' => 'boolean',
+        'is_verified' => 'boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -36,9 +41,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'verified',
+        'is_verified',
         'verification_token',
-        'admin',
+        'is_admin',
     ];
 
     /**
@@ -57,29 +62,24 @@ class User extends Authenticatable
         $this->attributes['name'] = strtolower($name);
     }
 
-    public function getNameAttribute($name): string
+    public function getNameAttribute(string $name): string
     {
         return ucwords($name);
     }
 
-    public function setEmailAttribute($email): void
+    public function setEmailAttribute(string $email): void
     {
         $this->attributes['email'] = strtolower($email);
     }
 
-//    public function getEmailAttribute($email)
-//    {
-//        return ucwords($email);
-//    }
-
     public function isVerified(): bool
     {
-        return $this->verified === self::VERIFIED_USER;
+        return $this->is_verified === self::VERIFIED_USER;
     }
 
     public function isAdmin(): bool
     {
-        return $this->admin === self::ADMIN_USER;
+        return $this->is_admin === self::ADMIN_USER;
     }
 
     public static function generateVerificationCode(): string
