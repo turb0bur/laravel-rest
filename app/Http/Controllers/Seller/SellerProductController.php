@@ -29,7 +29,7 @@ class SellerProductController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Seller $seller
+     * @param Seller $seller
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
@@ -47,8 +47,8 @@ class SellerProductController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\User                $seller
-     * @param \Illuminate\Http\Request $request
+     * @param User                $seller
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, User $seller)
@@ -75,9 +75,9 @@ class SellerProductController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Seller              $seller
-     * @param \App\Product             $product
+     * @param Request $request
+     * @param Seller              $seller
+     * @param Product             $product
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Seller $seller, Product $product)
@@ -118,8 +118,8 @@ class SellerProductController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Seller  $seller
-     * @param \App\Product $product
+     * @param Seller  $seller
+     * @param Product $product
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Seller $seller, Product $product)

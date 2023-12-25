@@ -14,8 +14,8 @@ class SellerPolicy
     /**
      * Determine whether the user can view the seller.
      *
-     * @param \App\User   $user
-     * @param \App\Seller $seller
+     * @param User   $user
+     * @param Seller $seller
      * @return bool
      */
     public function view(User $user, Seller $seller)
@@ -26,8 +26,8 @@ class SellerPolicy
     /**
      * Determine whether the user can sale.
      *
-     * @param \App\User   $user
-     * @param \App\Seller $seller
+     * @param User   $user
+     * @param Seller $seller
      * @return bool
      */
     public function sale(User $user, Seller $seller)
@@ -38,8 +38,8 @@ class SellerPolicy
     /**
      * Determine whether the user can update a product.
      *
-     * @param \App\User   $user
-     * @param \App\Seller $seller
+     * @param User   $user
+     * @param Seller $seller
      * @return bool
      */
     public function editProduct(User $user, Seller $seller)
@@ -50,8 +50,8 @@ class SellerPolicy
     /**
      * Determine whether the user can delete a product.
      *
-     * @param \App\User   $user
-     * @param \App\Seller $seller
+     * @param User   $user
+     * @param Seller $seller
      * @return bool
      */
     public function deleteProduct(User $user, Seller $seller)

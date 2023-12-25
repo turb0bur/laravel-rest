@@ -23,7 +23,7 @@ class ProductCategoryController extends ApiController
     /**
      * display a listing of the resource.
      *
-     * @param \app\product $product
+     * @param Product $product
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(product $product)
@@ -36,9 +36,9 @@ class ProductCategoryController extends ApiController
     /**
      * update the specified resource in storage.
      *
-     * @param \illuminate\http\request $request
-     * @param \app\product             $product
-     * @param \app\category            $category
+     * @param Request $request
+     * @param Product             $product
+     * @param Category            $category
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(request $request, product $product, category $category)
@@ -51,8 +51,8 @@ class ProductCategoryController extends ApiController
     /**
      * remove the specified resource from storage.
      *
-     * @param \app\product  $product
-     * @param \app\category $category
+     * @param Product  $product
+     * @param Category $category
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(product $product, category $category)

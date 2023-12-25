@@ -24,9 +24,9 @@ class ProductBuyerTransactionController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Product             $product
-     * @param \App\User                $buyer
+     * @param Request $request
+     * @param Product             $product
+     * @param User                $buyer
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, Product $product, User $buyer)

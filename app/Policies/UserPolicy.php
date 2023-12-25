@@ -13,8 +13,8 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\User $user
-     * @param \App\User $model
+     * @param User $user
+     * @param User $model
      * @return bool
      */
     public function view(User $user, User $model)
@@ -25,8 +25,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\User $user
-     * @param \App\User $model
+     * @param User $user
+     * @param User $model
      * @return bool
      */
     public function update(User $user, User $model)
@@ -37,8 +37,8 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\User $user
-     * @param \App\User $model
+     * @param User $user
+     * @param User $model
      * @return bool
      */
     public function delete(User $user, User $model)

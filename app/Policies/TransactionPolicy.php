@@ -14,8 +14,8 @@ class TransactionPolicy
     /**
      * Determine whether the user can view the transaction.
      *
-     * @param \App\User        $user
-     * @param \App\Transaction $transaction
+     * @param User        $user
+     * @param Transaction $transaction
      * @return bool
      */
     public function view(User $user, Transaction $transaction)

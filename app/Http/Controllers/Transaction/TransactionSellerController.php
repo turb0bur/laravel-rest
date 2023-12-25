@@ -17,7 +17,7 @@ class TransactionSellerController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Transaction $transaction
+     * @param Transaction $transaction
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Transaction $transaction)

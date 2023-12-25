@@ -10,7 +10,7 @@ class TransactionTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
-     * @param \App\Transaction $transaction
+     * @param Transaction $transaction
      * @return array
      */
     public function transform(Transaction $transaction)

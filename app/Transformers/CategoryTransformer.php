@@ -10,7 +10,7 @@ class CategoryTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
-     * @param \App\Category $buyer
+     * @param Category $buyer
      * @return array
      */
     public function transform(Category $category)

@@ -9,7 +9,7 @@ trait AdminAction
     /**
      * Check before an action whether the authenticated user is an admin.
      *
-     * @param \App\User $user
+     * @param User $user
      * @param           $ability
      * @return bool
      */

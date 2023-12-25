@@ -14,8 +14,8 @@ class BuyerPolicy
     /**
      * Determine whether the user can view the buyer.
      *
-     * @param \App\User  $user
-     * @param \App\Buyer $buyer
+     * @param User  $user
+     * @param Buyer $buyer
      * @return bool
      */
     public function view(User $user, Buyer $buyer)
@@ -26,8 +26,8 @@ class BuyerPolicy
     /**
      * Determine whether the user can purchase the product.
      *
-     * @param \App\User  $user
-     * @param \App\Buyer $buyer
+     * @param User  $user
+     * @param Buyer $buyer
      * @return bool
      */
     public function purchase(User $user, Buyer $buyer)

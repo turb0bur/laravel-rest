@@ -29,7 +29,7 @@ class ProductController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param \App\Product $product
+     * @param Product $product
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Product $product)

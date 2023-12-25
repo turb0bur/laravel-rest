@@ -17,7 +17,7 @@ class CategoryProductController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Category $category
+     * @param Category $category
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Category $category)

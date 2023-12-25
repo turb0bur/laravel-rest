@@ -34,7 +34,7 @@ class CategoryController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
      */
@@ -57,7 +57,7 @@ class CategoryController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param \App\Category $category
+     * @param Category $category
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Category $category)
@@ -68,8 +68,8 @@ class CategoryController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Category $category
+     * @param Request $request
+     * @param Category $category
      * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
      */
@@ -91,7 +91,7 @@ class CategoryController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Category $category
+     * @param Category $category
      * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
      */

@@ -14,8 +14,8 @@ class ProductPolicy
     /**
      * Determine whether the user can view the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
+     * @param User  $user
+     * @param Product  $product
      * @return bool
      */
     public function addCategory(User $user, Product $product)
@@ -26,8 +26,8 @@ class ProductPolicy
     /**
      * Determine whether the user can delete the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
+     * @param User  $user
+     * @param Product  $product
      * @return bool
      */
     public function deleteCategory(User $user, Product $product)

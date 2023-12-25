@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      * @return void
      */
     public function report(\Throwable $exception)
@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response and add CORS headers to pesponse.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \Throwable               $exception
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -70,8 +70,8 @@ class Handler extends ExceptionHandler
     /**
      * Handle all types of exceptions.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Exception               $exception
+     * @param Request $request
+     * @param Exception               $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleException($request, \Throwable $exception)
@@ -79,28 +79,28 @@ class Handler extends ExceptionHandler
         switch (true):
             case $exception instanceof ValidationException:
                 return $this->convertValidationExceptionToResponse($exception, $request);
-        case $exception instanceof ModelNotFoundException:
+            case $exception instanceof ModelNotFoundException:
                 $modelName = strtolower(class_basename($exception->getModel()));
 
-        return $this->errorResponse("Does not exist any {$modelName} with the specified identificator", 404);
-        case $exception instanceof AuthenticationException:
+                return $this->errorResponse("Does not exist any {$modelName} with the specified identificator", 404);
+            case $exception instanceof AuthenticationException:
                 return $this->unauthenticated($request, $exception);
-        case $exception instanceof AuthorizationException:
+            case $exception instanceof AuthorizationException:
                 return $this->errorResponse($exception->getMessage(), 403);
-        case $exception instanceof NotFoundHttpException:
+            case $exception instanceof NotFoundHttpException:
                 return $this->errorResponse('The specified resource can not be found', 404);
-        case $exception instanceof MethodNotAllowedHttpException:
+            case $exception instanceof MethodNotAllowedHttpException:
                 return $this->errorResponse('The specified method for the request is invalid', 405);
-        case $exception instanceof HttpException:
+            case $exception instanceof HttpException:
                 return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
-        case $exception instanceof QueryException:
+            case $exception instanceof QueryException:
                 $error_code = $exception->errorInfo[1];
-        if ($error_code == 1451) {
-            return $this->errorResponse('Can not remove this resource permanently. It is related with any other resources', 409);
-        }
-        case $exception instanceof TokenMismatchException:
+                if ($error_code == 1451) {
+                    return $this->errorResponse('Can not remove this resource permanently. It is related with any other resources', 409);
+                }
+            case $exception instanceof TokenMismatchException:
                 return redirect()->back()->withInput(request()->input());
-        default:
+            default:
                 return $this->errorResponse('Unexpected exception. Try later.', 500);
         endswitch;
     }
@@ -108,8 +108,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param \Illuminate\Http\Request                 $request
-     * @param \Illuminate\Auth\AuthenticationException $exception
+     * @param Request                 $request
+     * @param AuthenticationException $exception
      * @return \Illuminate\Http\RedirectResponse| \Illuminate\Http\JsonResponse
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -124,8 +124,8 @@ class Handler extends ExceptionHandler
     /**
      * Create a response object from the given validation exception.
      *
-     * @param \Illuminate\Validation\ValidationException $e
-     * @param \Illuminate\Http\Request                   $request
+     * @param ValidationException $e
+     * @param Request                   $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function convertValidationExceptionToResponse(ValidationException $exception, $request)
@@ -143,7 +143,7 @@ class Handler extends ExceptionHandler
     /**
      * Check either request is from API or from web.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return bool
      */
     private function isFrontend(Request $request)

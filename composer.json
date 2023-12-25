@@ -21,7 +21,7 @@
   },
   "require-dev": {
     "fakerphp/faker": "^1.9.1",
-    "friendsofphp/php-cs-fixer": "3.8",
+    "friendsofphp/php-cs-fixer": "^3.42",
     "laravel/pint": "^1.0",
     "laravel/sail": "^1.18",
     "mockery/mockery": "^1.4.4",
@@ -51,7 +51,7 @@
       "Tests\\": "tests/"
     }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "scripts": {
     "post-autoload-dump": [

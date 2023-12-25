@@ -41,7 +41,7 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -79,7 +79,7 @@ class UserController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param User                     $user
      * @return \Illuminate\Http\JsonResponse
      */
@@ -136,7 +136,7 @@ class UserController extends ApiController
     /**
      * Return the current authenticated user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function me(Request $request)

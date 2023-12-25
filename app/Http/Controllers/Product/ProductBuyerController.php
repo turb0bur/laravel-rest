@@ -15,7 +15,7 @@ class ProductBuyerController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Product  $product
+     * @param Product  $product
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Product $product)

@@ -10,7 +10,7 @@ class BuyerTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
-     * @param \App\Buyer $buyer
+     * @param Buyer $buyer
      * @return array
      */
     public function transform(Buyer $buyer)

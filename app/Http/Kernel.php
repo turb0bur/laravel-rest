@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
+        Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
+        Middleware\TrustProxies::class,
     ];
 
     /**
@@ -29,12 +29,12 @@ class Kernel extends HttpKernel
     protected $middlewareGroups = [
         'web' => [
             'signature:X-Application-Name',
-            \App\Http\Middleware\EncryptCookies::class,
+            Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -54,18 +54,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'               => \App\Http\Middleware\Authenticate::class,
+        'auth'               => Middleware\Authenticate::class,
         'auth.basic'         => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings'           => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can'                => \Illuminate\Auth\Middleware\Authorize::class,
         'cors'               => \Illuminate\Http\Middleware\HandleCors::class,
         'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
-        'guest'              => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest'              => Middleware\RedirectIfAuthenticated::class,
         'throttle'           => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'scope'              => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
         'scopes'             => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-        'signature'          => \App\Http\Middleware\SignatureMiddleware::class,
-        'transform.input'    => \App\Http\Middleware\TransformInput::class,
+        'signature'          => Middleware\SignatureMiddleware::class,
+        'transform.input'    => Middleware\TransformInput::class,
     ];
 
     /**
@@ -78,7 +78,7 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\Authenticate::class,
+        Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,

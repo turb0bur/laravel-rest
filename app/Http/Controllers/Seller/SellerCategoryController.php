@@ -17,7 +17,7 @@ class SellerCategoryController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Seller $seller
+     * @param Seller $seller
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Seller $seller)
