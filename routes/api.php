@@ -27,7 +27,7 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
-/**
+/*
  * |--------------------------------------------------------------------------
  * | API Routes
  * |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ use Laravel\Passport\Http\Controllers\AccessTokenController;
  * |
  */
 
-/**
+/*
  * Users
  */
 Route::name('me')->get('users/me', [UserController::class, 'me']);
@@ -46,7 +46,7 @@ Route::resource('users', UserController::class)->except('create', 'edit');
 Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
 Route::name('confirm')->get('users/{user}/resend', [UserController::class, 'resend']);
 
-/**
+/*
  * Buyers
  */
 Route::resource('buyers', BuyerController::class)->only('index', 'show');
@@ -55,7 +55,7 @@ Route::resource('buyers.products', BuyerProductController::class)->only('index')
 Route::resource('buyers.sellers', BuyerSellerController::class)->only('index');
 Route::resource('buyers.categories', BuyerCategoryController::class)->only('index');
 
-/**
+/*
  * Sellers
  */
 Route::resource('sellers', SellerController::class)->only('index', 'show');
@@ -64,7 +64,7 @@ Route::resource('sellers.categories', SellerCategoryController::class)->only('in
 Route::resource('sellers.buyers', SellerBuyerController::class)->only('index');
 Route::resource('sellers.products', SellerProductController::class)->except('create', 'show', 'edit');
 
-/**
+/*
  * Products
  */
 Route::resource('products', ProductController::class)->only('index', 'show');
@@ -73,7 +73,7 @@ Route::resource('products.buyers', ProductBuyerController::class)->only('index')
 Route::resource('products.categories', ProductCategoryController::class)->except('create', 'show', 'edit');
 Route::resource('products.buyers.transactions', ProductBuyerTransactionController::class)->only('store');
 
-/**
+/*
  * Categories
  */
 Route::resource('categories', CategoryController::class)->except('create', 'edit');
@@ -82,7 +82,7 @@ Route::resource('categories.sellers', CategorySellerController::class)->only('in
 Route::resource('categories.transactions', CategoryTransactionController::class)->only('index');
 Route::resource('categories.buyers', CategoryBuyerController::class)->only('index');
 
-/**
+/*
  * Transactions
  */
 Route::resource('transactions', TransactionController::class)->only('index', 'show');

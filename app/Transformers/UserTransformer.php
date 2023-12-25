@@ -13,14 +13,14 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user): array
     {
         return [
-            'id'           => (int)$user->id,
-            'name'         => (string)$user->name,
-            'email'        => (string)$user->email,
-            'isVerified'   => (bool)$user->is_verified,
-            'isAdmin'      => (bool)$user->is_admin,
-            'creationDate' => (string)$user->created_at,
-            'lastChanges'  => (string)$user->updated_at,
-            'deletionDate' => isset($user->deleted_at) ? (string)$user->deleted_at : null,
+            'id'           => (int) $user->id,
+            'name'         => (string) $user->name,
+            'email'        => (string) $user->email,
+            'isVerified'   => (bool) $user->is_verified,
+            'isAdmin'      => (bool) $user->is_admin,
+            'creationDate' => (string) $user->created_at,
+            'lastChanges'  => (string) $user->updated_at,
+            'deletionDate' => isset($user->deleted_at) ? (string) $user->deleted_at : null,
 
             'links' => [
                 [
