@@ -135,8 +135,7 @@ return [
     */
 
     'providers' => [
-
-        /*
+        /**
          * Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
@@ -162,11 +161,12 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
+        /**
          * Package Service Providers...
          */
+        L5Swagger\L5SwaggerServiceProvider::class,
 
-        /*
+        /**
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -174,7 +174,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
