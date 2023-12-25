@@ -69,6 +69,6 @@
     "static-code-analysis": "phpstan analyse app config database resources routes tests --level=1",
     "lint": "php-cs-fixer fix --config .php-cs-fixer.php --dry-run",
     "fix": "php-cs-fixer fix --config .php-cs-fixer.php",
-    "test": "phpunit --debug -c phpunit.xml"
+    "test": "php artisan test --coverageq"
   }
 }
