@@ -45,7 +45,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
 
-        Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
         Passport::enableImplicitGrant();
