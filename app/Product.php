@@ -4,18 +4,21 @@ namespace App;
 
 use App\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
 
-    const AVAILABLE_PRODUCT = 'available';
-    const UNAVAILABLE_PRODUCT = 'unavailable';
+    public const AVAILABLE_PRODUCT = 'available';
 
-    public $transformer = ProductTransformer::class;
+    public const UNAVAILABLE_PRODUCT = 'unavailable';
 
-    protected $dates = ['deleted_at'];
+    public string $transformer = ProductTransformer::class;
+
     protected $fillable = [
         'name',
         'description',
@@ -28,22 +31,22 @@ class Product extends Model
         'pivot',
     ];
 
-    public function isAvailable()
+    public function isAvailable(): bool
     {
-        return $this->status == self::AVAILABLE_PRODUCT;
+        return $this->status === self::AVAILABLE_PRODUCT;
     }
 
-    public function seller()
+    public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
     }
 
-    public function transactions()
+    public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
 
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }

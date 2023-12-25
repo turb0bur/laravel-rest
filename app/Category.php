@@ -4,15 +4,15 @@ namespace App;
 
 use App\Transformers\CategoryTransformer;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
     use SoftDeletes;
 
-    public $transformer = CategoryTransformer::class;
+    public string $transformer = CategoryTransformer::class;
 
-    protected $dates = ['delete_at'];
     protected $fillable = [
         'name',
         'description',
@@ -21,7 +21,7 @@ class Category extends Model
         'pivot',
     ];
 
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }

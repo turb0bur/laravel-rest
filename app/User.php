@@ -11,18 +11,21 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, SoftDeletes;
+    use Notifiable;
+    use HasApiTokens;
+    use SoftDeletes;
 
-    const VERIFIED_USER = '1';
-    const UNVERIFIED_USER = '0';
+    public const VERIFIED_USER = '1';
 
-    const ADMIN_USER = 'true';
-    const REGULAR_USER = 'false';
+    public const UNVERIFIED_USER = '0';
 
-    public $transformer = UserTransformer::class;
+    public const ADMIN_USER = 'true';
+
+    public const REGULAR_USER = 'false';
+
+    public string $transformer = UserTransformer::class;
 
     protected $table = 'users';
-    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -49,17 +52,17 @@ class User extends Authenticatable
         'verification_token',
     ];
 
-    public function setNameAttribute($name)
+    public function setNameAttribute($name): void
     {
         $this->attributes['name'] = strtolower($name);
     }
 
-    public function getNameAttribute($name)
+    public function getNameAttribute($name): string
     {
         return ucwords($name);
     }
 
-    public function setEmailAttribute($email)
+    public function setEmailAttribute($email): void
     {
         $this->attributes['email'] = strtolower($email);
     }
@@ -69,17 +72,17 @@ class User extends Authenticatable
 //        return ucwords($email);
 //    }
 
-    public function isVerified()
+    public function isVerified(): bool
     {
-        return $this->verified == self::VERIFIED_USER;
+        return $this->verified === self::VERIFIED_USER;
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return $this->admin == self::ADMIN_USER;
+        return $this->admin === self::ADMIN_USER;
     }
 
-    public static function generateVerificationCode()
+    public static function generateVerificationCode(): string
     {
         return Str::random(40);
     }

@@ -4,18 +4,19 @@ namespace App;
 
 use App\Scopes\BuyerScope;
 use App\Transformers\BuyerTransformer;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Buyer extends User
 {
-    public $transformer = BuyerTransformer::class;
+    public string $transformer = BuyerTransformer::class;
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::addGlobalScope(new BuyerScope);
     }
 
-    public function transactions()
+    public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
