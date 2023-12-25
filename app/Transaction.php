@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Transformers\TransactionTransformer;
+use Database\Factories\TransactionFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Transaction extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     public string $transformer = TransactionTransformer::class;
 
@@ -18,6 +21,11 @@ class Transaction extends Model
         'buyer_id',
         'product_id',
     ];
+
+    protected static function newFactory(): TransactionFactory
+    {
+        return TransactionFactory::new();
+    }
 
     public function buyer(): BelongsTo
     {
