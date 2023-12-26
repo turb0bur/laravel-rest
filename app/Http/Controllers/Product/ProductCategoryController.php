@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Category;
 use App\Http\Controllers\ApiController;
-use App\Product;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

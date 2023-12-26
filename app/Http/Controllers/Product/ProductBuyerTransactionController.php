@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\ApiController;
-use App\Product;
-use App\Transaction;
+use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\User;
 use App\Transformers\TransactionTransformer;
-use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

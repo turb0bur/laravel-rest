@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Product;
+use App\Models\Product;
+use App\Models\User;
 use App\Traits\AdminAction;
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy

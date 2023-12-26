@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Mail\UserCreated;
 use App\Mail\UserEmailChanged;
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;

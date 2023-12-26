@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Transformers\TransactionTransformer;
 use Database\Factories\TransactionFactory;

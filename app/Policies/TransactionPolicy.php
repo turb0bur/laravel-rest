@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Models\Transaction;
+use App\Models\User;
 use App\Traits\AdminAction;
-use App\Transaction;
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TransactionPolicy

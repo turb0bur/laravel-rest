@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\ApiController;
-use App\Product;
-use App\Seller;
+use App\Models\Product;
+use App\Models\Seller;
+use App\Models\User;
 use App\Transformers\ProductTransformer;
-use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

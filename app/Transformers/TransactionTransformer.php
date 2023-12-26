@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Transaction;
+use App\Models\Transaction;
 use League\Fractal\TransformerAbstract;
 
 class TransactionTransformer extends TransformerAbstract

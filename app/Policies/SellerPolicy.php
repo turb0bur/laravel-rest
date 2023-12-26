@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Seller;
+use App\Models\Seller;
+use App\Models\User;
 use App\Traits\AdminAction;
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SellerPolicy

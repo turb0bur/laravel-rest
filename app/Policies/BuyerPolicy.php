@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Buyer;
+use App\Models\Buyer;
+use App\Models\User;
 use App\Traits\AdminAction;
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BuyerPolicy

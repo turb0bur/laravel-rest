@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\SellerScope;
 use App\Transformers\SellerTransformer;

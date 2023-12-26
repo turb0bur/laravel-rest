@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\ApiController;
-use App\Product;
+use App\Models\Product;
 
 class ProductBuyerController extends ApiController
 {

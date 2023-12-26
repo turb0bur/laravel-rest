@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Category;
 use App\Http\Controllers\ApiController;
+use App\Models\Category;
 use App\Transformers\CategoryTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\ApiController;
-use App\Seller;
+use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
 
 class SellerTransactionController extends ApiController
