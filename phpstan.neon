@@ -1,0 +1,23 @@
+parameters:
+    level: 7
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - resources
+        - tests
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    excludePaths:
+        - app/Providers/*
+    parallel:
+    	maximumNumberOfProcesses: 1
+    ignoreErrors:
+        - '#Access to an undefined property App\\Http\\Requests\\(.*)::\$.*#'
+        - '#(.*)should return Illuminate\\Http\\RedirectResponse but returns Illuminate\\Http\\RedirectResponse|Illuminate\\Routing\\Redirector#'
+        - '#Access to an undefined property App\\Models(.*)::\$.*#'
+        - '#Call to an undefined method App\\Models(.*)::.*#'
+        - '#Call to an undefined static method App\\Models(.*)::.*#'
+        - '#Call to an undefined method Illuminate\\(.*)::.*#'
+        - '#Call to an undefined static method Illuminate\\(.*)::.*#'
