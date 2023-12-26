@@ -12,12 +12,11 @@ use App\Product;
 use App\Seller;
 use App\Transaction;
 use App\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as BaseAuthServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
-class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends BaseAuthServiceProvider
 {
     /**
      * The policy mappings for the application.
@@ -43,8 +42,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
 
-        Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
-        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+        Passport::tokensExpireIn(now()->addMinutes(30));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
         Passport::enableImplicitGrant();
         Passport::tokensCan([
             'purchase-product' => 'Create a new transaction for a specific product',
