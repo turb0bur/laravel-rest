@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Product;
 use App\Category;
 use App\Http\Controllers\ApiController;
 use App\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductCategoryController extends ApiController
 {
     public function __construct()
     {
-        parent::__construct();
-
         $this->middleware('client.credentials')->only('index');
         $this->middleware('auth:api')->except('index');
         $this->middleware('scope:manage-products')->except('index');
@@ -22,11 +22,8 @@ class ProductCategoryController extends ApiController
 
     /**
      * display a listing of the resource.
-     *
-     * @param Product $product
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(product $product)
+    public function index(product $product): JsonResponse
     {
         $categories = $product->categories;
 
@@ -35,13 +32,8 @@ class ProductCategoryController extends ApiController
 
     /**
      * update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Product             $product
-     * @param Category            $category
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(request $request, product $product, category $category)
+    public function update(Request $request, Product $product, Category $category): JsonResponse
     {
         $product->categories()->syncwithoutdetaching([$category->id]);
 
@@ -50,15 +42,11 @@ class ProductCategoryController extends ApiController
 
     /**
      * remove the specified resource from storage.
-     *
-     * @param Product  $product
-     * @param Category $category
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(product $product, category $category)
+    public function destroy(Product $product, Category $category): JsonResponse
     {
         if (! $product->categories()->find($category->id)) {
-            return $this->errorResponse('the specified category is not a category of this product', 404);
+            return $this->errorResponse('the specified category is not a category of this product', Response::HTTP_NOT_FOUND);
         }
 
         $product->categories()->detach($category->id);

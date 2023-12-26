@@ -7,8 +7,10 @@ use App\Product;
 use App\Transaction;
 use App\Transformers\TransactionTransformer;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductBuyerTransactionController extends ApiController
 {
@@ -23,13 +25,8 @@ class ProductBuyerTransactionController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @param Product             $product
-     * @param User                $buyer
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Product $product, User $buyer)
+    public function store(Request $request, Product $product, User $buyer): JsonResponse
     {
         $rules = [
             'quantity' => 'required|integer|min:1',
@@ -38,19 +35,19 @@ class ProductBuyerTransactionController extends ApiController
         $this->validate($request, $rules);
 
         if ($buyer->id == $product->seller->id) {
-            return $this->errorResponse('The buyer must be different from the seller', 409);
+            return $this->errorResponse('The buyer must be different from the seller', Response::HTTP_CONFLICT);
         }
         if (! $buyer->isVerified()) {
-            return $this->errorResponse('The buyer must be verified user', 409);
+            return $this->errorResponse('The buyer must be verified user', Response::HTTP_CONFLICT);
         }
         if (! $product->seller->isVerified()) {
-            return $this->errorResponse('The seller must be verified user', 409);
+            return $this->errorResponse('The seller must be verified user', Response::HTTP_CONFLICT);
         }
         if (! $product->isAvailable()) {
-            return $this->errorResponse('The product must be available', 409);
+            return $this->errorResponse('The product must be available', Response::HTTP_CONFLICT);
         }
         if ($product->quantity < $request->quantity) {
-            return $this->errorResponse('The product does not have enough units for the transaction', 409);
+            return $this->errorResponse('The product does not have enough units for the transaction', Response::HTTP_CONFLICT);
         }
 
         return DB::transaction(function () use ($request, $product, $buyer) {
@@ -63,7 +60,7 @@ class ProductBuyerTransactionController extends ApiController
                 'product_id' => $product->id,
             ]);
 
-            return $this->showOne($transaction, 201);
+            return $this->showOne($transaction, Response::HTTP_CREATED);
         });
     }
 }

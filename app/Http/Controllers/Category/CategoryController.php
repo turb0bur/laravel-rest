@@ -6,14 +6,14 @@ use App\Category;
 use App\Http\Controllers\ApiController;
 use App\Transformers\CategoryTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends ApiController
 {
     public function __construct()
     {
-        parent::__construct();
-
         $this->middleware('client.credentials')->only(['index', 'show']);
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->middleware('transform.input:'.CategoryTransformer::class)->only(['store', 'update']);
@@ -21,10 +21,8 @@ class CategoryController extends ApiController
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $categories = Category::all();
 
@@ -33,12 +31,8 @@ class CategoryController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $this->allowedAdminAction();
 
@@ -51,16 +45,13 @@ class CategoryController extends ApiController
 
         $newCategory = Category::create($request->all());
 
-        return $this->showOne($newCategory, 201);
+        return $this->showOne($newCategory, Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param Category $category
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Category $category)
+    public function show(Category $category): JsonResponse
     {
         return $this->showOne($category);
     }
@@ -80,7 +71,7 @@ class CategoryController extends ApiController
         $category->fill($request->only(['name', 'description']));
 
         if ($category->isClean()) {
-            return $this->errorResponse('You need to specify any different value to update', 422);
+            return $this->errorResponse('You need to specify any different value to update', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $category->save();
@@ -90,12 +81,8 @@ class CategoryController extends ApiController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Category $category
-     * @return \Illuminate\Http\JsonResponse
-     * @throws AuthorizationException
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): JsonResponse
     {
         $this->allowedAdminAction();
 

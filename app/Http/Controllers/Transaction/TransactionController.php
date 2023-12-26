@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\ApiController;
 use App\Transaction;
+use Illuminate\Http\JsonResponse;
 
 class TransactionController extends ApiController
 {
     public function __construct()
     {
         parent::__construct();
+
         $this->middleware('scope:read-general')->only('show');
         $this->middleware('can:view,transaction')->only('show');
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $this->allowedAdminAction();
 
@@ -30,11 +30,8 @@ class TransactionController extends ApiController
 
     /**
      * Display the specified resource.
-     *
-     * @param Transaction $transaction
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Transaction $transaction)
+    public function show(Transaction $transaction): JsonResponse
     {
         return $this->showOne($transaction);
     }

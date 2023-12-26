@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\JsonResponse;
 
 class CategoryTransactionController extends ApiController
 {
@@ -14,11 +15,8 @@ class CategoryTransactionController extends ApiController
 
     /**
      * Display a listing of the resource.
-     *
-     * @param Category $category
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Category $category)
+    public function index(Category $category): JsonResponse
     {
         $this->allowedAdminAction();
 

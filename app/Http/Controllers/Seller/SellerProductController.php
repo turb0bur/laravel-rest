@@ -8,8 +8,10 @@ use App\Seller;
 use App\Transformers\ProductTransformer;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
@@ -28,15 +30,12 @@ class SellerProductController extends ApiController
 
     /**
      * Display a listing of the resource.
-     *
-     * @param Seller $seller
-     *
-     * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
      */
-    public function index(Seller $seller)
+    public function index(Request $request, Seller $seller): JsonResponse
     {
-        if (\request()->user()->tokenCan('read-general') || \request()->user()->tokenCan('manage-products')) {
+        $user = $request->user();
+        if ($user->tokenCan('read-general') || $user->tokenCan('manage-products')) {
             $products = $seller->products;
 
             return $this->showAll($products);
@@ -46,12 +45,8 @@ class SellerProductController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param User                $seller
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, User $seller)
+    public function store(Request $request, User $seller): JsonResponse
     {
         $rules = [
             'name'        => 'required',
@@ -74,13 +69,8 @@ class SellerProductController extends ApiController
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Seller              $seller
-     * @param Product             $product
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Seller $seller, Product $product)
+    public function update(Request $request, Seller $seller, Product $product): JsonResponse
     {
         $rules = [
             'quantity' => 'integer|min:1',
@@ -117,12 +107,8 @@ class SellerProductController extends ApiController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Seller  $seller
-     * @param Product $product
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Seller $seller, Product $product)
+    public function destroy(Seller $seller, Product $product): JsonResponse
     {
         $this->checkSeller($seller, $product);
 
@@ -133,10 +119,13 @@ class SellerProductController extends ApiController
         return $this->showOne($product);
     }
 
-    protected function checkSeller(Seller $seller, Product $product)
+    /**
+     * @throws HttpException
+     */
+    protected function checkSeller(Seller $seller, Product $product): void
     {
         if ($seller->id != $product->seller_id) {
-            throw new HttpException(422, 'The specified user is not the actual seller of the product.');
+            throw new HttpException(Response::HTTP_UNPROCESSABLE_ENTITY, 'The specified user is not the actual seller of the product.');
         }
     }
 }
