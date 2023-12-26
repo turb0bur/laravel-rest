@@ -32,14 +32,14 @@ jobs:
           cp .env.ci .env
           php artisan key:generate
 
-      - name: Code Style Analysis
-        run: composer run lint
+      - name: Code Style Fixing
+        run: composer fix
 
       #      - name: Static Code Analysis
       #        run: composer run static-code-analysis
 
-      - name: Run Testsuite
-        run: composer run test
+      - name: Run Tests Suite
+        run: composer test
 
 #      - name: Require Vapor CLI
 #        run: composer global require laravel/vapor-cli
