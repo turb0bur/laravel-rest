@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\ApiResponser;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use OpenApi\Annotations as OA;
@@ -17,7 +17,7 @@ use OpenApi\Annotations as OA;
  */
 class ApiController extends Controller
 {
-    use ApiResponser;
+    use ApiResponseTrait;
 
     public function __construct()
     {
