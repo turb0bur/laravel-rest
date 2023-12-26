@@ -9,11 +9,8 @@ class SellerTransformer extends TransformerAbstract
 {
     /**
      * A Fractal transformer.
-     *
-     * @param Seller $seller
-     * @return array
      */
-    public function transform(Seller $seller)
+    public function transform(Seller $seller): array
     {
         return [
             'id'           => $seller->id,
@@ -53,33 +50,33 @@ class SellerTransformer extends TransformerAbstract
         ];
     }
 
-    public static function originalAttribute($index)
+    public static function originalAttribute(string $index): string|null
     {
         $attributes = [
             'id'           => 'id',
             'name'         => 'name',
             'email'        => 'email',
-            'isVerified'   => 'verified',
+            'isVerified'   => 'is_verified',
             'creationDate' => 'created_at',
             'lastChanges'  => 'updated_at',
             'deletionDate' => 'deleted_at',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 
-    public static function transformedAttribute($index)
+    public static function transformedAttribute(string $index): string|null
     {
         $attributes = [
             'id'         => 'id',
             'name'       => 'name',
             'email'      => 'email',
-            'verified'   => 'isVerified',
+            'is_verified'   => 'isVerified',
             'created_at' => 'creationDate',
             'updated_at' => 'lastChanges',
             'deleted_at' => 'deletionDate',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 }

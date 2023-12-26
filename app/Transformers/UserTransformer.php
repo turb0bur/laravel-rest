@@ -31,7 +31,7 @@ class UserTransformer extends TransformerAbstract
         ];
     }
 
-    public static function originalAttribute(string $index): bool|null
+    public static function originalAttribute(string $index): string|null
     {
         $attributes = [
             'id'           => 'id',
@@ -47,7 +47,7 @@ class UserTransformer extends TransformerAbstract
         return $attributes[$index] ?? null;
     }
 
-    public static function transformedAttribute(string $index): bool|null
+    public static function transformedAttribute(string $index): string|null
     {
         $attributes = [
             'id'          => 'id',

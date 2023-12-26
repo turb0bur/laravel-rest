@@ -9,11 +9,8 @@ class ProductTransformer extends TransformerAbstract
 {
     /**
      * A Fractal transformer.
-     *
-     * @param Product $product
-     * @return array
      */
-    public function transform(Product $product)
+    public function transform(Product $product): array
     {
         return [
             'id'           => (int) $product->id,
@@ -52,7 +49,7 @@ class ProductTransformer extends TransformerAbstract
         ];
     }
 
-    public static function originalAttribute($index)
+    public static function originalAttribute(string $index): string|null
     {
         $attributes = [
             'id'           => 'id',
@@ -67,10 +64,10 @@ class ProductTransformer extends TransformerAbstract
             'deletionDate' => 'deleted_at',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 
-    public static function transformedAttribute($index)
+    public static function transformedAttribute(string $index): string|null
     {
         $attributes = [
             'id'          => 'id',
@@ -85,6 +82,6 @@ class ProductTransformer extends TransformerAbstract
             'deleted_at'  => 'deletionDate',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return $attributes[$index] ?? null;
     }
 }
