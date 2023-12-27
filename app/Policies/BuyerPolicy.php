@@ -4,33 +4,26 @@ namespace App\Policies;
 
 use App\Models\Buyer;
 use App\Models\User;
-use App\Traits\AdminAction;
+use App\Traits\AdminActionTrait;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BuyerPolicy
 {
-    use HandlesAuthorization, AdminAction;
+    use HandlesAuthorization;
+    use AdminActionTrait;
 
     /**
      * Determine whether the user can view the buyer.
-     *
-     * @param User  $user
-     * @param Buyer $buyer
-     * @return bool
      */
-    public function view(User $user, Buyer $buyer)
+    public function view(User $user, Buyer $buyer): bool
     {
         return $user->id === $buyer->id;
     }
 
     /**
      * Determine whether the user can purchase the product.
-     *
-     * @param User  $user
-     * @param Buyer $buyer
-     * @return bool
      */
-    public function purchase(User $user, Buyer $buyer)
+    public function purchase(User $user, Buyer $buyer): bool
     {
         return $user->id === $buyer->id;
     }

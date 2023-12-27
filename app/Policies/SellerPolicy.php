@@ -4,57 +4,42 @@ namespace App\Policies;
 
 use App\Models\Seller;
 use App\Models\User;
-use App\Traits\AdminAction;
+use App\Traits\AdminActionTrait;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SellerPolicy
 {
-    use HandlesAuthorization, AdminAction;
+    use HandlesAuthorization;
+    use AdminActionTrait;
 
     /**
      * Determine whether the user can view the seller.
-     *
-     * @param User   $user
-     * @param Seller $seller
-     * @return bool
      */
-    public function view(User $user, Seller $seller)
+    public function view(User $user, Seller $seller): bool
     {
         return $user->id === $seller->id;
     }
 
     /**
      * Determine whether the user can sale.
-     *
-     * @param User   $user
-     * @param Seller $seller
-     * @return bool
      */
-    public function sale(User $user, Seller $seller)
+    public function sale(User $user, Seller $seller): bool
     {
         return $user->id === $seller->id;
     }
 
     /**
      * Determine whether the user can update a product.
-     *
-     * @param User   $user
-     * @param Seller $seller
-     * @return bool
      */
-    public function editProduct(User $user, Seller $seller)
+    public function editProduct(User $user, Seller $seller): bool
     {
         return $user->id === $seller->id;
     }
 
     /**
      * Determine whether the user can delete a product.
-     *
-     * @param User   $user
-     * @param Seller $seller
-     * @return bool
      */
-    public function deleteProduct(User $user, Seller $seller)
+    public function deleteProduct(User $user, Seller $seller): bool
     {
         return $user->id === $seller->id;
     }
