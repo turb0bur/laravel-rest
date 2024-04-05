@@ -38,7 +38,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     public function boot()
     {
-        Gate::define('admin-action', function ($user) {
+        Gate::define('admin-action', function (User $user) {
             return $user->isAdmin();
         });
 
@@ -48,10 +48,10 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         Passport::tokensCan([
             'purchase-product' => 'Create a new transaction for a specific product',
             'manage-products'  => 'Create, read, update, delete products(CRUD)',
-            'manage-account'   => 'Read your account data (id, name, email) if verified, and if admin (cannot read password).
+            'manage-account'   => 'Read your account data (id, name, email) if is verified, and if is admin (cannot read password).
                 Modify your account data (email and password). Can not delete your account.',
-            'read-general'     => 'Read general information like purchasing categories, purchased products, selling products, selling categories,
-                your transactions(purchasing and sales)',
+            'read-general'     => 'Read general information like purchasing categories, purchased products,
+                selling products, selling categories, your transactions(purchasing and sales)',
         ]);
     }
 }
