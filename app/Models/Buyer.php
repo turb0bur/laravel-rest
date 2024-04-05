@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Scopes\BuyerScope;
 use App\Transformers\BuyerTransformer;
+use Database\Factories\BuyerFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Buyer extends User
@@ -14,6 +15,11 @@ class Buyer extends User
     {
         parent::boot();
         static::addGlobalScope(new BuyerScope);
+    }
+
+    protected static function newFactory(): BuyerFactory
+    {
+        return BuyerFactory::new();
     }
 
     public function transactions(): HasMany
