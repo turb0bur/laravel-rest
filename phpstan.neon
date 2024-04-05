@@ -14,7 +14,7 @@ parameters:
     parallel:
     	maximumNumberOfProcesses: 1
     ignoreErrors:
-        - '#Access to an undefined property App\\Http\\Requests\\(.*)::\$.*#'
+        - '#Access to an undefined property Illuminate\\Http\\Request::\$.*#'
         - '#(.*)should return Illuminate\\Http\\RedirectResponse but returns Illuminate\\Http\\RedirectResponse|Illuminate\\Routing\\Redirector#'
         - '#Access to an undefined property App\\Models(.*)::\$.*#'
         - '#Call to an undefined method App\\Models(.*)::.*#'
